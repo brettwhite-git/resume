@@ -1,0 +1,17 @@
+/* Google Font import */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Base styles */
+@import './base.css';
+
+/* Layouts */
+@import './layouts/analytics.css';
+@import './layouts/base.css';
+@import './layouts/about.css';
+@import './layouts/workHistory.css';
+@import './layouts/certifications.css';
+
+/* Components */
+@import './components/metrics.css';
+@import './components/tooltips.css';

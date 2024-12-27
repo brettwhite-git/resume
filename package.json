@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "apexcharts": "^4.2.0",
+    "gsap": "^3.12.5",
+    "lucide": "^0.468.0"
+  }
+}

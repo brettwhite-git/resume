@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <button class="toggle-sidebar">
+            <i class="lucide" data-lucide="menu"></i>
+        </button>
+        <div class="profile-image-container">
+            <img src="./src/assets/images/bw_pp.png" alt="Profile">
+        </div>
+        <div class="profile-section">
+            <h1 class="profile-name">Brett White</h1>
+            <p class="profile-title">Software sales consultant & <br>technology enthusiast</p>
+        </div>
+        <nav class="nav-links">
+            <button class="nav-button" data-section="about" data-tooltip="About Me">
+                <div class="button-full">
+                    <span>
+                        <i class="lucide" data-lucide="home"></i>
+                        About Me
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="home"></i>
+                </div>
+            </button>
+            <button class="nav-button" data-section="workHistory" data-tooltip="Work History">
+                <div class="button-full">
+                    <span>
+                        <i class="lucide" data-lucide="briefcase"></i>
+                        Work History
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="briefcase"></i>
+                </div>
+            </button>
+            <button class="nav-button" data-section="analytics">
+                <div class="button-full">
+                    <span>
+                        <i class="lucide" data-lucide="bar-chart-2"></i>
+                        Analytics
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="bar-chart-2"></i>
+                </div>
+            </button>
+            <button class="nav-button" data-section="certifications">
+                <div class="button-full">
+                    <span>
+                        <i class="lucide" data-lucide="award"></i>
+                        Certifications
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="award"></i>
+                </div>
+            </button>
+            <button class="nav-button" data-tooltip="LinkedIn">
+                <div class="button-full">
+                    <span>
+                        <a href="https://www.linkedin.com/in/bwhite90" target="_blank">
+                            <i class="lucide" data-lucide="linkedin"></i>
+                            LinkedIn
+                        </a>
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <a href="https://www.linkedin.com/in/bwhite90" target="_blank">
+                        <i class="lucide" data-lucide="linkedin"></i>
+                    </a>
+                </div>
+            </button>
+            <button class="nav-button">
+                <div class="button-full">
+                    <span>
+                        <a href="https://github.com/brett-white90" target="_blank">
+                            <i class="lucide" data-lucide="github"></i>
+                            GitHub
+                        </a>
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="github"></i>
+                </div>
+            </button>
+            <button class="nav-button">
+                <div class="button-full">
+                    <span>
+                        <a href="/resume-v2-project/src/assets/brett_white_resume.pdf" target="_blank">
+                            <i class="lucide" data-lucide="file-text"></i>
+                            Resume
+                        </a>
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="file-text"></i>
+                </div>
+            </button>
+            <button class="nav-button">
+                <div class="button-full">
+                    <span>
+                        <a href="mailto:hello@brettwhite.io" style="text-decoration:none; color:inherit;">
+                            <i class="lucide" data-lucide="at-sign"></i>
+                            Me
+                        </a>
+                    </span>
+                    <i class="arrow lucide" data-lucide="square-chevron-right"></i>
+                </div>
+                <div class="button-collapsed">
+                    <i class="lucide" data-lucide="at-sign"></i>
+                </div>
+            </button>
+        </nav>
+    </div>
+
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </main>
+    <script type="module" src="./src/js/index.js"></script>
+</body>
+</html>
+

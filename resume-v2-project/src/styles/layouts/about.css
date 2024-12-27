@@ -1,0 +1,493 @@
+.about-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #60A5FA, #A78BFA);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff7b4b, #ffcf0d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    padding: 2rem 1rem 0;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.skill-card {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.skill-icon-wrapper {
+    margin-bottom: 1rem;
+}
+
+.skill-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-icon.cloud-architecture {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563eb 100%);
+}
+
+.skill-icon.development {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.skill-icon.ai-analytics {
+    background: linear-gradient(135deg, #e27d3d 0%, #c2410c 100%);
+}
+
+.skill-icon.data-management {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.skill-icon.security {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+.skill-icon.sales-enablement {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+}
+
+.skill-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+}
+
+
+.skill-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    color: #94A3B8;
+}
+
+.testimonial-container {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    margin: 0 1rem;
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-content {
+    padding: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 4rem 0;
+    position: relative;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.testimonial-text-content::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial-text {
+    color: #E2E8F0;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-author {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.author-name {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.author-position {
+    color: #94A3B8;
+}
+
+.testimonial-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    right: 1rem;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+
+.control-button {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.control-button:hover {
+    background: rgba(96, 165, 250, 0.2);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+@media (max-width: 768px) {
+    .testimonial-container {
+        padding: 2rem 1.5rem;
+        height: 350px;
+    }
+
+    .testimonial-text-content {
+        padding: 2rem 3rem 0;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+    }
+
+    .quote-mark {
+        font-size: 3rem;
+    }
+
+    .quote-mark:not(.end) {
+        top: -0.5rem;
+    }
+
+    .quote-mark.end {
+        bottom: -0.5rem;
+    }
+
+    .control-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        max-width: 100%;
+        padding: 1.5rem 1.5rem 0;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-section {
+        margin-bottom: 3rem;
+    }
+
+    .section-title,
+    .accomplishments-section .section-title {
+        font-size: 1.875rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .testimonial-container {
+        height: 300px;
+    }
+}
+
+/* Career Impact Section */
+.career-impact-section {
+    margin-bottom: 4rem;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.impact-card {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 1rem;
+    padding: 2rem;
+    transition: transform 0.2s ease;
+}
+
+
+.impact-title {
+    color: #94a3b8;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.impact-value {
+    background: linear-gradient(135deg, #619dff 0%, #f77cf5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.impact-subtitle {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+/* Add responsive adjustments for impact grid */
+@media (max-width: 1024px) {
+    .impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .impact-card {
+        padding: 1.5rem;
+    }
+    
+    .impact-value {
+        font-size: 2rem;
+    }
+}
+
+/* Update Stats Highlights Section */
+.accomplishments-section {
+    margin-bottom: 4rem;
+}
+
+.accomplishments-section .section-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+}
+
+.stats-highlights-section {
+    margin: 0 1rem;
+    padding: 3rem 2.5rem;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 1rem;
+    width: auto;
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.highlight-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem;
+}
+
+.highlight-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+}
+
+.highlight-icon i,
+.highlight-icon svg {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
+    stroke-width: 1.5px;
+}
+
+.highlight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.highlight-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.highlight-label {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+/* Responsive adjustments for highlights */
+@media (max-width: 1024px) {
+    .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+
+    .highlight-value {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-highlights-section {
+        margin: 2rem 1rem;
+        padding: 2rem;
+    }
+
+    .highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .highlight-card {
+        padding: 1rem;
+    }
+
+    .highlight-value {
+        font-size: 1.75rem;
+    }
+
+    .highlight-icon {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+
+    .highlight-icon i,
+    .highlight-icon svg {
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+    }
+}
+
+/* Update quote styling */
+.quote-mark {
+    color: #60A5FA;
+    opacity: 0.3;
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 0;
+}
+
+.quote-mark.left {
+    left: 0;
+    transform: scaleX(-1);
+}
+
+.quote-mark.right {
+    right: 0;
+}
+
+/* Update responsive styles */
+@media (max-width: 768px) {
+    .quote-mark {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .quote-mark {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
+

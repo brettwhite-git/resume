@@ -1,0 +1,7 @@
+{
+    "livePreview.serverRoot": ".",
+    "livePreview.autoRefreshPreview": "Never",
+    "livePreview.openBrowserOnStart": true,
+    "livePreview.preserveContent": true,
+    "livePreview.refreshDelay": 500
+}

@@ -1,0 +1,10 @@
+<IfModule mod_mime.c>
+    AddType text/javascript .js
+    AddType text/css .css
+</IfModule>
+
+<Files *.js>
+    Header set Content-Type "text/javascript"
+</Files>
+
+<Files *.css>
