@@ -137,3 +137,64 @@
     }
 }
 
+.work-history-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.job {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.job:last-child {
+    border-bottom: none;
+}
+
+.company-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+}
+
+.company {
+    font-weight: 500;
+}
+
+.date {
+    font-size: 0.9rem;
+}
+
+.company-description {
+    margin: 1rem 0;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.achievements {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.achievements li {
+    position: relative;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.achievements li::before {
+    content: "✓";
+    position: absolute;
+    left: -1.5rem;
+    color: var(--accent-color);
+}
+
+h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
