@@ -8,7 +8,7 @@ export const certificationsComponent = {
                     <div class="cert-card">
                         <h3 class="cert-title">Oracle Cloud Architect Associate</h3>
                         <p class="cert-description">
-                            Designed and implemented comprehensive cloud solutions on Oracle Cloud Infrastructure, focusing on scalable architectures, security frameworks, and cost-effective deployment strategies while ensuring high availability and disaster recovery capabilities.
+                            Design and implement comprehensive cloud solutions on Oracle Cloud Infrastructure, focusing on scalable architectures, security frameworks, and cost-effective deployment strategies while ensuring high availability and disaster recovery capabilities.
                         </p>
                     </div>
 
@@ -22,14 +22,14 @@ export const certificationsComponent = {
                     <div class="cert-card">
                         <h3 class="cert-title">Oracle Cloud AI Foundations Associate</h3>
                         <p class="cert-description">
-                            AI fundamentals, demonstrating proficiency in implementing machine learning solutions, working with AI services, and understanding core AI/ML concepts within the OCI ecosystem. Includes expertise in deploying AI models, managing AI workloads, and utilizing OCI's AI services for business applications.
+                            AI fundamentals, demonstrating proficiency in how to implement machine learning solutions, working with AI services, and understanding core AI/ML concepts within the OCI ecosystem. Includes deploying AI models, managing AI workloads, and utilizing OCI's AI services for business applications.
                         </p>
                     </div>
 
                     <div class="cert-card">
                         <h3 class="cert-title">Oracle Cloud Foundations Associate</h3>
                         <p class="cert-description">
-                            Validated expertise in core Oracle Cloud Infrastructure concepts, including cloud computing fundamentals, OCI architecture, security principles, networking, storage, and compute services. Demonstrates understanding of OCI best practices for building and managing cloud solutions while ensuring optimal performance and cost efficiency.
+                            Validated core foundations in Oracle Cloud Infrastructure concepts, including cloud computing fundamentals, OCI architecture, security principles, networking, storage, and compute services. Demonstrates understanding of OCI best practices for building and managing cloud solutions while ensuring optimal performance and cost efficiency.
                         </p>
                     </div>
 
@@ -37,7 +37,7 @@ export const certificationsComponent = {
                     <div class="cert-card">
                         <h3 class="cert-title">NetSuite SuiteCloud Developer</h3>
                         <p class="cert-description">
-                            Advanced expertise in developing sophisticated SuiteCloud solutions, including custom modules, workflows, and integrations using SuiteScript 2.0/2.1, demonstrating mastery in creating scalable and efficient business process automations.
+                            Expertise in developing sophisticated SuiteCloud solutions, including custom modules, workflows, and integrations using SuiteScript 2.0/2.1, demonstrating knowledge in creating scalable and efficient business process automations.
                         </p>
                     </div>
 
@@ -59,7 +59,7 @@ export const certificationsComponent = {
                     <div class="cert-card">
                         <h3 class="cert-title">NetSuite ERP Consultant</h3>
                         <p class="cert-description">
-                            Expert consultant in NetSuite ERP implementation and optimization, with comprehensive knowledge of financial, inventory, and supply chain management processes, specializing in tailoring solutions to meet complex business requirements.
+                            Demonstrated knowledge in NetSuite ERP implementation and optimization, with comprehensive knowledge of financial, inventory, and supply chain management processes, specializing in tailoring solutions to meet complex business requirements.
                         </p>
                     </div>
 
@@ -81,7 +81,7 @@ export const certificationsComponent = {
                     <div class="cert-card">
                         <h3 class="cert-title">NetSuite Financial User</h3>
                         <p class="cert-description">
-                            Certified financial expert in NetSuite's comprehensive financial management capabilities, with deep understanding of accounting processes, reporting requirements, and implementation of sophisticated financial workflows.
+                            Certified in NetSuite's comprehensive financial management capabilities, with deep understanding of accounting processes, reporting requirements, and implementation of sophisticated financial workflows.
                         </p>
                     </div>
 

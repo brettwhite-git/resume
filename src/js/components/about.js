@@ -116,6 +116,12 @@ class AboutComponent {
     renderSkillsSection() {
         const skills = [
             {
+                icon: 'users',
+                category: "Sales Enablement",
+                items: ["Solution Design", "Discovery", "POC", "Value Engineering"],
+                bgColor: "sales-enablement"
+            },
+            {
                 icon: 'cloud',
                 category: "Cloud Architecture",
                 items: ["Oracle Cloud", "SuiteCloud", "Networking", "Infrastructure"],
@@ -130,7 +136,7 @@ class AboutComponent {
             {
                 icon: 'brain-circuit',
                 category: "AI & Analytics",
-                items: ["Generative AI", "Data", "Analytics", "BI Tools"],
+                items: ["Generative AI", "Data", "Analytics", "Business Intelligence"],
                 bgColor: "ai-analytics"
             },
             {
@@ -144,12 +150,6 @@ class AboutComponent {
                 category: "Security & Compliance",
                 items: ["Access Control", "Disaster Recovery", "Compliance", "Risk Management"],
                 bgColor: "security"
-            },
-            {
-                icon: 'users',
-                category: "Sales Enablement",
-                items: ["Solution Design", "Discovery", "POC", "Value Engineering"],
-                bgColor: "sales-enablement"
             }
         ];
 

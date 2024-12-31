@@ -208,7 +208,19 @@ export const analyticsComponent = {
             chart: {
                 ...chartDefaults.areaSpline.chart,
                 id: 'arr-pipeline-chart'
-            }
+            },
+            responsive: [{
+                breakpoint: 492,  // Mobile breakpoint
+                options: {
+                    xaxis: {
+                        labels: {
+                            style: {
+                                fontSize: '8px'  // Smaller font only on mobile
+                            }
+                        }
+                    }
+                }
+            }]
         };
 
         const arrPipelineChart = initializeChart("#arr-pipeline-chart", arrPipelineConfig);
@@ -220,7 +232,57 @@ export const analyticsComponent = {
             series: topModulesData.series,
             chart: {
                 ...chartDefaults.horizontalBar.chart,
-                id: 'top-modules-chart'
+                id: 'top-modules-chart',
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    borderRadius: 4,
+                    endingShape: 'rounded'
+                }
+            },
+            xaxis: {
+                min: 0,
+                max: 500000,
+                tickAmount: 4,
+                axisBorder: {
+                    show: true
+                },
+                axisTicks: {
+                    show: true
+                },
+                labels: {
+                    show: true,
+                    style: {
+                        colors: '#ffffff'
+                    },
+                    formatter: function(value) {
+                        const roundedValue = Math.round(value);
+                        const showValues = [0, 100000, 250000, 500000];
+                        
+                        const isShowValue = showValues.some(v => Math.abs(v - roundedValue) < 1000);
+                        
+                        if (isShowValue) {
+                            return roundedValue === 0 ? '$0' : `$${roundedValue/1000}K`;
+                        }
+                        return '';
+                    }
+                }
+            },
+            grid: {
+                xaxis: {
+                    lines: {
+                        show: true
+                    }
+                },
+                yaxis: {
+                    lines: {
+                        show: false
+                    }
+                }
             }
         };
 
@@ -237,8 +299,105 @@ export const analyticsComponent = {
                 id: 'arr-category-chart'
             },
             tooltip: {
-                enabled: false  // Disable tooltips for this chart
-            }
+                enabled: false
+            },
+            legend: {
+                position: 'right',
+                fontSize: '14px',
+                horizontalAlign: 'center',
+                markers: {
+                    width: 12,
+                    height: 12
+                },
+                itemMargin: {
+                    horizontal: 8,
+                    vertical: 4
+                },
+                offsetY: 50
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '70%',
+                        labels: {
+                            show: true,
+                            name: {
+                                show: true,
+                                fontSize: '14px'
+                            },
+                            value: {
+                                show: true,
+                                fontSize: '16px',
+                                formatter: function(val) {
+                                    return '$' + Number(val).toLocaleString('en-US', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                                }
+                            },
+                            total: {
+                                show: true,
+                                label: 'Total ARR',
+                                fontSize: '14px',
+                                formatter: function(w) {
+                                    const total = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                                    return '$' + total.toLocaleString('en-US', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            responsive: [{
+                breakpoint: 1274,
+                options: {
+                    chart: {
+                        height: 380
+                    },
+                    legend: {
+                        fontSize: '12px',
+                        position: 'bottom',
+                        horizontalAlign: 'center',
+                        offsetY: 0,
+                        itemMargin: {
+                            horizontal: 12,
+                            vertical: 3
+                        }
+                    }
+                }
+            }, {
+                breakpoint: 896,
+                options: {
+                    chart: {
+                        height: 300
+                    },
+                    legend: {
+                        fontSize: '11px',
+                        itemMargin: {
+                            horizontal: 8,
+                            vertical: 2
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            donut: {
+                                labels: {
+                                    total: {
+                                        show: true,
+                                        fontSize: '14px'
+                                    },
+                                    value: {
+                                        fontSize: '14px'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }]
         };
 
         const arrCategoryChart = initializeChart("#arr-category-chart", arrCategoryConfig);

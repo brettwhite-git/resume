@@ -4,7 +4,7 @@
     --color-secondary: #1a2435;
     --color-accent: #60a5fa;
     --color-text-primary: #ffffff;
-    --color-text-secondary: #94a3b8;
+    --color-text-secondary: #afc1db;
     --color-text-tertiary: #cbd5e1;
     
     /* Background Colors */
@@ -58,6 +58,11 @@
     /* Transitions */
     --transition-sidebar: transform 0.3s ease, width 0.3s ease, padding 0.3s ease;
     --transition-overlay: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Add mobile-specific variables */
+    --sidebar-width-mobile: 220px;
+    --profile-image-size-mobile: 120px;
+    --spacing-mobile: 0.75rem;
 }
 
 /* Base styles */
@@ -455,10 +460,8 @@ body {
 
     .sidebar {
         transform: translateX(-100%);
-        width: 250px;
-        position: fixed;
-        height: 100vh;
-        box-shadow: none;
+        width: var(--sidebar-width-mobile);
+        padding: var(--spacing-mobile);
     }
 
     .sidebar:not(.collapsed) {
@@ -507,6 +510,57 @@ body {
     /* When sidebar is open */
     body.sidebar-open {
         overflow: hidden;
+    }
+
+    /* Scale down profile image for mobile */
+    .profile-image-container {
+        width: var(--profile-image-size-mobile);
+        height: var(--profile-image-size-mobile);
+        margin: var(--spacing-mobile) auto;
+    }
+
+    /* Adjust nav buttons for mobile */
+    .nav-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .nav-button i:not(.arrow) {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.5rem;
+    }
+
+    /* Adjust profile text sizes */
+    .profile-name {
+        font-size: 1.25rem;
+        margin: var(--spacing-mobile) 0;
+    }
+
+    .profile-title {
+        font-size: 0.8rem;
+    }
+
+    .profile-company {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-mobile);
+    }
+
+    /* Adjust nav links spacing */
+    .nav-links {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    /* When sidebar is expanded */
+    .sidebar:not(.collapsed) {
+        transform: translateX(0);
+        width: var(--sidebar-width-mobile);
+    }
+
+    /* Ensure content doesn't overlap with menu toggle */
+    .content-container {
+        padding-top: 4rem;
     }
 }
 
@@ -606,6 +660,28 @@ body.mobile-view .main-content {
 .sidebar-overlay.active + .main-content {
     /* Prevent content scroll when overlay is active */
     overflow: hidden;
+}
+
+/* Update smaller mobile screens */
+@media screen and (max-width: 375px) {
+    :root {
+        --sidebar-width-mobile: 200px;
+        --profile-image-size-mobile: 100px;
+    }
+
+    .nav-button {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-button i:not(.arrow) {
+        width: 16px;
+        height: 16px;
+    }
+
+    .profile-name {
+        font-size: 1.125rem;
+    }
 }
 
 

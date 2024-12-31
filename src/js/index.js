@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         sectionContent[state.section].afterRender();
                     }
                     setActiveButton(document.querySelector(`[data-section="${state.section}"]`));
+                    scrollToTop();
                 } else {
                     // Invalid section, return to home
                     resetToHome();
@@ -45,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Navigation error:', error);
             resetToHome();
         }
+
+        // Mobile cleanup
+        if (window.innerWidth <= 492) {
+            cleanupMobileState();
+        }
     });
 
     // Helper function to reset to home state
@@ -52,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.content-container').innerHTML = aboutComponent.render();
         aboutComponent.afterRender();
         setActiveButton(null);
-        // Update URL without creating new history entry
+        scrollToTop();
         history.replaceState({ section: 'about' }, '', '#about');
     }
 
@@ -72,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     setActiveButton(button);
                     history.pushState({ section: section }, '', `#${section}`);
+                    scrollToTop();
 
-                    // Add this to ensure scrolling is restored after navigation
+                    // Mobile cleanup
                     if (window.innerWidth <= 492) {
                         document.body.style.overflow = '';
                         removeOverlay();
@@ -95,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     sidebar.classList.add('collapsed');
                     localStorage.removeItem('sidebarExpanded');
                 }
+            }
+
+            if (window.innerWidth <= 1780) {
+                collapseSidebar();
             }
         });
     });
@@ -202,6 +213,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial setup
     handleResize();
+
+    // Modify the document click listener
+    document.addEventListener('click', (e) => {
+        // Only handle clicks when window width is <= 1780px
+        if (window.innerWidth <= 1780) {
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            // Check if sidebar is expanded and click is outside sidebar and menu toggle
+            if (!sidebar.classList.contains('collapsed') && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                e.preventDefault(); // Only prevent default if we're actually collapsing
+                collapseSidebar();
+                // Restore scroll position after collapse
+                requestAnimationFrame(() => {
+                    document.body.style.overflow = '';
+                });
+            }
+        }
+    });
 });
 
 function setActiveButton(activeButton) {
@@ -237,4 +269,27 @@ function handleResize() {
         cleanupMobileState();
     }
     // ... rest of existing resize code
+}
+
+// Modify the collapseSidebar function
+function collapseSidebar() {
+    // Only collapse if window width is <= 1780px
+    if (window.innerWidth <= 1780) {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar.classList.contains('collapsed')) {
+            sidebar.classList.add('collapsed');
+            removeOverlay();
+            document.body.style.overflow = '';
+            // Clear the localStorage state when manually collapsing
+            localStorage.removeItem('sidebarExpanded');
+        }
+    }
+}
+
+// Add this helper function
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+    });
 }
