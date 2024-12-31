@@ -9,10 +9,13 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="sidebar">
-        <button class="toggle-sidebar">
-            <i class="lucide" data-lucide="menu"></i>
-        </button>
+    <!-- Separate menu button from sidebar -->
+    <button class="menu-toggle">
+        <i class="lucide" data-lucide="menu"></i>
+    </button>
+
+    <!-- Sidebar as a separate container -->
+    <div class="sidebar collapsed">
         <div class="profile-image-container">
             <img src="./src/assets/images/bw_pp.png" alt="Profile">
         </div>

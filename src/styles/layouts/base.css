@@ -49,17 +49,56 @@
     --breakpoint-tablet: 810px;
     --breakpoint-mobile: 492px;
     --breakpoint-mobile-small: 375px;
+    
+    /* Add z-index variables */
+    --z-overlay: 998;
+    --z-sidebar: 1000;
+    --z-toggle: 1001;
+    
+    /* Transitions */
+    --transition-sidebar: transform 0.3s ease, width 0.3s ease, padding 0.3s ease;
+    --transition-overlay: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 /* Base styles */
 body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    position: relative;
     display: flex;
-    min-height: 100vh; 
     background-color: var(--bg-primary);
     font-family: 'Roboto', sans-serif;
     color: var(--color-text-primary);
+}
+
+/* Menu toggle button styles - always visible */
+.menu-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--bg-button);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-all);
+    z-index: var(--z-toggle);
+}
+
+.menu-toggle i {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-toggle:hover {
+    background: var(--bg-button-hover);
+    transform: scale(1.05);
 }
 
 /* Sidebar styles */
@@ -72,13 +111,9 @@ body {
     padding: var(--spacing-xl);
     background-color: var(--bg-secondary);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
+    transition: var(--transition-sidebar);
+    z-index: var(--z-sidebar);
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
-    z-index: 100;
 }
 
 /* Profile section */
@@ -195,10 +230,12 @@ body {
 
 /* Main content styles */
 .main-content {
-    margin-left: var(--sidebar-width);
     flex: 1;
+    width: 100%;
     padding: var(--spacing-xl) 0;
+    box-sizing: border-box;
     overflow-y: auto;
+    margin-left: var(--sidebar-width);
 }
 
 .content-container {
@@ -316,6 +353,7 @@ body {
 
 .toggle-sidebar:hover {
     background: var(--bg-button-hover);
+    transform: scale(1.05);
 }
 
 .toggle-sidebar i {
@@ -364,7 +402,7 @@ body {
 .sidebar.collapsed .profile-image-container {
     width: 42px;
     height: 42px;
-    margin: 35px auto 25px;
+    margin: 45px auto 25px;
 }
 
 .sidebar.collapsed .profile-section {
@@ -383,73 +421,23 @@ body {
     box-shadow: var(--shadow-hover);
 }
 
-/* Add at the end of base.css */
+/* Remove duplicate media queries and consolidate styles */
 @media screen and (max-width: 1780px) {
-    /* Default collapsed state for tablet */
+    /* Default collapsed state for tablet/desktop */
     .sidebar {
         width: 70px;
         padding: var(--spacing-xl) 0;
     }
 
-    .profile-section,
-    .button-full {
-        display: none;
-    }
-
-    .button-collapsed {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .profile-image-container {
-        width: 42px;
-        height: 42px;
-        margin: 35px auto 25px;
-    }
-
-    .nav-button {
-        width: 42px;
-        height: 42px;
-        padding: 0;
-        margin: 0 auto;
-        justify-content: center;
-    }
-
     .main-content {
         margin-left: 70px;
+        transition: margin-left 0.3s ease;
     }
 
-    /* Expanded state styles */
+    /* Expanded state */
     .sidebar:not(.collapsed) {
         width: var(--sidebar-width);
         padding: var(--spacing-xl);
-    }
-
-    .sidebar:not(.collapsed) .profile-section {
-        display: flex;
-    }
-
-    .sidebar:not(.collapsed) .button-full {
-        display: flex;
-    }
-
-    .sidebar:not(.collapsed) .button-collapsed {
-        display: none;
-    }
-
-    .sidebar:not(.collapsed) .profile-image-container {
-        width: var(--profile-image-size);
-        height: var(--profile-image-size);
-        margin: var(--spacing-lg) auto var(--spacing-md);
-    }
-
-    .sidebar:not(.collapsed) .nav-button {
-        width: 100%;
-        height: auto;
-        padding: 0.875rem 1.25rem;
-        margin: 0;
-        justify-content: space-between;
     }
 
     .sidebar:not(.collapsed) + .main-content {
@@ -457,22 +445,167 @@ body {
     }
 }
 
-/* Tablet breakpoint */
-@media screen and (max-width: 810px) {
+/* Mobile styles */
+@media screen and (max-width: 492px) {
+    body {
+        display: block;
+        /* Ensure body can scroll on mobile */
+        overflow-y: auto;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        width: 250px;
+        position: fixed;
+        height: 100vh;
+        box-shadow: none;
+    }
+
+    .sidebar:not(.collapsed) {
+        transform: translateX(0);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        position: relative;
+    }
+
+    .content-container {
+        margin: 0;
+        padding: var(--spacing-md);
+        padding-top: 3.5rem; /* Menu height */
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        top: 0;
+    }
+
+    .sidebar.collapsed + .main-content,
+    .sidebar:not(.collapsed) + .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-overlay {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .sidebar-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+        width: 250px;
+    }
+
+    /* When sidebar is open */
+    body.sidebar-open {
+        overflow: hidden;
+    }
+}
+
+/* Base overlay styles - keep only one definition */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-overlay);
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-overlay);
+}
+
+/* Base sidebar transitions - keep only one definition */
+.sidebar {
+    transition: var(--transition-sidebar);
+}
+
+/* Add a mobile-specific class */
+body.mobile-view .sidebar-header {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+body.mobile-view .main-content {
+    padding-top: 70px; /* Add space for the fixed header */
+}
+
+/* Smaller mobile screens */
+@media screen and (max-width: 448px) {
+    .content-container {
+        padding: 0 0.75rem;
+    }
+    
+    .main-content {
+        padding-top: 3.5rem;
+    }
+}
+
+/* Tablet/Desktop styles */
+@media screen and (min-width: 493px) and (max-width: 1780px) {
     .sidebar {
         width: 70px;
         padding: var(--spacing-xl) 0;
     }
 
-    .main-content {
-        margin-left: 70px;
-        padding: var(--spacing-lg);
+    .sidebar:not(.collapsed) {
+        width: var(--sidebar-width);
+        padding: var(--spacing-xl);
     }
 
-    /* Adjust content container for tablet */
-    .content-container {
-        padding: 0 var(--spacing-md);
+    .main-content {
+        margin-left: 70px;
     }
+
+    .sidebar:not(.collapsed) + .main-content {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+/* Desktop styles */
+@media screen and (min-width: 1781px) {
+    .sidebar {
+        width: var(--sidebar-width);
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+/* Overlay styles */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-overlay);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-overlay.active + .main-content {
+    /* Prevent content scroll when overlay is active */
+    overflow: hidden;
 }
 
 

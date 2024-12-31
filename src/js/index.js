@@ -1,7 +1,7 @@
-import { analyticsComponent } from './components/analytics.js';
-import { certificationsComponent } from './components/certifications.js';
-import { aboutComponent } from './components/about.js';
-import { workHistoryComponent } from './components/workHistory.js';
+import { analyticsComponent } from '../js/components/analytics.js';
+import { certificationsComponent } from '../js/components/certifications.js';
+import { aboutComponent } from '../js/components/about.js';
+import { workHistoryComponent } from '../js/components/workHistory.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded');
@@ -73,10 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     setActiveButton(button);
                     history.pushState({ section: section }, '', `#${section}`);
 
-                    // Auto collapse sidebar after navigation
-                    if (window.innerWidth <= 1780 && !sidebar.classList.contains('collapsed')) {
+                    // Add this to ensure scrolling is restored after navigation
+                    if (window.innerWidth <= 492) {
+                        document.body.style.overflow = '';
+                        removeOverlay();
                         sidebar.classList.add('collapsed');
-                        localStorage.removeItem('sidebarExpanded');
                     }
                 } catch (error) {
                     console.error('Section rendering error:', error);
@@ -102,35 +103,93 @@ document.addEventListener('DOMContentLoaded', () => {
     history.replaceState({ section: 'about' }, '', '#about');
 
     // Add this new code for sidebar toggle
-    const toggleBtn = document.querySelector('.toggle-sidebar');
+    const menuToggle = document.querySelector('.menu-toggle');
     const sidebar = document.querySelector('.sidebar');
     
     // Simplified toggle handler
-    toggleBtn.addEventListener('click', () => {
+    menuToggle.addEventListener('click', () => {
+        const isMobile = window.innerWidth <= 492;
         const isCollapsed = sidebar.classList.toggle('collapsed');
-        const isTablet = window.innerWidth <= 1780;
         
-        // Store only one state
-        if (isTablet) {
+        if (isMobile) {
+            if (!isCollapsed) {
+                addOverlay();
+                document.body.style.overflow = 'hidden';
+            } else {
+                removeOverlay();
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Only store state for larger screens
+        if (!isMobile) {
             localStorage.setItem('sidebarExpanded', !isCollapsed);
         }
     });
 
-    // Optimized resize handler
+    // Add these new functions for mobile overlay
+    function addOverlay() {
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+        
+        // Force reflow
+        overlay.offsetHeight;
+        
+        // Add active class after a brief delay
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('collapsed');
+            removeOverlay();
+        });
+    }
+
+    function removeOverlay() {
+        const overlay = document.querySelector('.sidebar-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            // Wait for transition to complete before removing
+            overlay.addEventListener('transitionend', function handler() {
+                overlay.remove();
+                overlay.removeEventListener('transitionend', handler);
+            });
+        }
+    }
+
+    // Update the resize handler
     function handleResize() {
         const width = window.innerWidth;
         
-        if (width <= 1780) {
-            // Only modify classes if needed
+        if (width <= 492) {
+            // Mobile view
+            sidebar.classList.add('collapsed');
+            removeOverlay();  // Ensure overlay is removed
+            document.body.style.overflow = '';
+        } else if (width <= 1780) {
+            // Tablet view - restore saved state or collapse
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (overlay) {
+                removeOverlay();
+                document.body.style.overflow = '';
+            }
+            
+            // Default to collapsed on tablet unless explicitly expanded
             if (!localStorage.getItem('sidebarExpanded')) {
-                !sidebar.classList.contains('collapsed') && 
-                    sidebar.classList.add('collapsed');
+                sidebar.classList.add('collapsed');
             }
         } else {
-            // Clear states and ensure expanded for desktop
-            localStorage.clear();
-            sidebar.classList.contains('collapsed') && 
-                sidebar.classList.remove('collapsed');
+            // Desktop view (> 1780px) - always expanded
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (overlay) {
+                removeOverlay();
+                document.body.style.overflow = '';
+            }
+            
+            sidebar.classList.remove('collapsed'); // Always expanded on desktop
+            localStorage.clear(); // Clear stored state on desktop
         }
     }
 
@@ -152,4 +211,30 @@ function setActiveButton(activeButton) {
     if (activeButton) {
         activeButton.classList.add('active');
     }
+}
+
+function cleanupMobileState() {
+    document.body.style.overflow = '';
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (overlay) {
+        removeOverlay();
+    }
+    sidebar.classList.add('collapsed');
+}
+
+// Add to popstate handler
+window.addEventListener('popstate', (event) => {
+    if (window.innerWidth <= 492) {
+        cleanupMobileState();
+    }
+    // ... rest of existing popstate code
+});
+
+// Add to resize handler
+function handleResize() {
+    const width = window.innerWidth;
+    if (width > 492) {
+        cleanupMobileState();
+    }
+    // ... rest of existing resize code
 }
