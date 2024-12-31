@@ -490,3 +490,109 @@
     }
 }
 
+/* Update hero section responsive styles */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        padding: 1.5rem 0.75rem 0;
+    }
+}
+
+@media (max-width: 492px) {
+    .hero-title {
+        font-size: 2.75rem;
+        line-height: 1.15;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 1rem 0.5rem 0;
+        line-height: 1.4;
+    }
+
+    .about-section {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-title {
+        font-size: 2.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9375rem;
+        padding: 0.75rem 0.5rem 0;
+    }
+
+    .about-section {
+        padding: 1.25rem 0.75rem;
+    }
+}
+
+/* Update Career Impact Section responsive styles */
+@media (max-width: 768px) {
+    .career-impact-section .section-title {
+        font-size: 2.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .impact-value {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 492px) {
+    .career-impact-section .section-title {
+        font-size: 2.25rem;
+        line-height: 1.1;
+        margin-bottom: 1.75rem;
+    }
+
+    .impact-value {
+        font-size: 2.75rem;
+    }
+
+    .impact-title {
+        font-size: 0.9375rem;
+    }
+
+    .impact-subtitle {
+        font-size: 0.9375rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .career-impact-section .section-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .impact-value {
+        font-size: 2.5rem;
+    }
+
+    .impact-title {
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .impact-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .impact-card {
+        padding: 1.5rem;
+    }
+}
+

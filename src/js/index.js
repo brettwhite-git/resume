@@ -3,6 +3,86 @@ import { certificationsComponent } from '../js/components/certifications.js';
 import { aboutComponent } from '../js/components/about.js';
 import { workHistoryComponent } from '../js/components/workHistory.js';
 
+const BREAKPOINTS = {
+    MOBILE: 492,
+    TABLET: 1780
+};
+
+// Group all sidebar-related functions together
+const sidebarManager = {
+    addOverlay() {
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+        
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            this.collapse();
+            this.removeOverlay();
+        });
+    },
+
+    removeOverlay() {
+        const overlay = document.querySelector('.sidebar-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            overlay.addEventListener('transitionend', function handler() {
+                overlay.remove();
+                overlay.removeEventListener('transitionend', handler);
+            });
+        }
+    },
+
+    collapse() {
+        if (window.innerWidth <= BREAKPOINTS.TABLET) {
+            const sidebar = document.querySelector('.sidebar');
+            if (!sidebar.classList.contains('collapsed')) {
+                sidebar.classList.add('collapsed');
+                this.removeOverlay();
+                localStorage.removeItem('sidebarExpanded');
+            }
+        }
+    }
+};
+
+// Group navigation-related functions
+const navigationManager = {
+    setActiveButton(activeButton) {
+        document.querySelectorAll('.nav-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
+    },
+
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'instant'
+        });
+    },
+
+    resetToHome() {
+        document.querySelector('.content-container').innerHTML = aboutComponent.render();
+        aboutComponent.afterRender();
+        this.setActiveButton(null);
+        this.scrollToTop();
+        history.replaceState({ section: 'about' }, '', '#about');
+    },
+
+    debug: {
+        logNavigation(section) {
+            console.log(`Navigating to section: ${section}`);
+            console.log('Current window width:', window.innerWidth);
+            console.log('Current URL:', window.location.href);
+        }
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded');
     
@@ -14,41 +94,50 @@ document.addEventListener('DOMContentLoaded', () => {
         about: aboutComponent,
         workHistory: workHistoryComponent,
         home: {
-            render: () => aboutComponent.render()
+            render: () => {
+                try {
+                    return aboutComponent.render();
+                } catch (error) {
+                    console.error('Error rendering home/about:', error);
+                    return '<div>Error loading content</div>';
+                }
+            }
         }
     };
 
-    document.querySelector('.content-container').innerHTML = aboutComponent.render();
-    aboutComponent.afterRender();
+    // Add error boundary to initial render
+    try {
+        document.querySelector('.content-container').innerHTML = aboutComponent.render();
+        aboutComponent.afterRender();
+    } catch (error) {
+        console.error('Initial render error:', error);
+        document.querySelector('.content-container').innerHTML = '<div>Error loading content</div>';
+    }
     
     // Handle browser back/forward buttons
     window.addEventListener('popstate', (event) => {
         try {
             const state = event.state;
-            // If state exists and is valid
             if (state && state.section) {
                 if (sectionContent[state.section]) {
                     document.querySelector('.content-container').innerHTML = sectionContent[state.section].render();
                     if (sectionContent[state.section].afterRender) {
                         sectionContent[state.section].afterRender();
                     }
-                    setActiveButton(document.querySelector(`[data-section="${state.section}"]`));
-                    scrollToTop();
+                    navigationManager.setActiveButton(document.querySelector(`[data-section="${state.section}"]`));
+                    navigationManager.scrollToTop();
                 } else {
-                    // Invalid section, return to home
-                    resetToHome();
+                    navigationManager.resetToHome();
                 }
             } else {
-                // No state, return to home
-                resetToHome();
+                navigationManager.resetToHome();
             }
         } catch (error) {
             console.error('Navigation error:', error);
-            resetToHome();
+            navigationManager.resetToHome();
         }
 
-        // Mobile cleanup
-        if (window.innerWidth <= 492) {
+        if (window.innerWidth <= BREAKPOINTS.MOBILE) {
             cleanupMobileState();
         }
     });
@@ -69,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (section && sectionContent[section]) {
                 e.preventDefault();
+                navigationManager.debug.logNavigation(section);
                 try {
                     const component = sectionContent[section];
                     document.querySelector('.content-container').innerHTML = component.render();
@@ -76,19 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (component.afterRender) {
                         component.afterRender();
                     }
-                    setActiveButton(button);
+                    navigationManager.setActiveButton(button);
                     history.pushState({ section: section }, '', `#${section}`);
-                    scrollToTop();
+                    navigationManager.scrollToTop();
 
                     // Mobile cleanup
-                    if (window.innerWidth <= 492) {
+                    if (window.innerWidth <= BREAKPOINTS.MOBILE) {
                         document.body.style.overflow = '';
-                        removeOverlay();
+                        sidebarManager.removeOverlay();
                         sidebar.classList.add('collapsed');
                     }
                 } catch (error) {
                     console.error('Section rendering error:', error);
-                    resetToHome();
+                    navigationManager.resetToHome();
                 }
             }
             else if (link) {
@@ -119,96 +209,49 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Simplified toggle handler
     menuToggle.addEventListener('click', () => {
-        const isMobile = window.innerWidth <= 492;
+        const isMobile = window.innerWidth <= BREAKPOINTS.MOBILE;
         const isCollapsed = sidebar.classList.toggle('collapsed');
         
         if (isMobile) {
             if (!isCollapsed) {
-                addOverlay();
+                sidebarManager.addOverlay();
                 document.body.style.overflow = 'hidden';
             } else {
-                removeOverlay();
+                sidebarManager.removeOverlay();
                 document.body.style.overflow = '';
             }
         }
         
-        // Only store state for larger screens
         if (!isMobile) {
             localStorage.setItem('sidebarExpanded', !isCollapsed);
         }
     });
 
-    // Add these new functions for mobile overlay
-    function addOverlay() {
-        const overlay = document.createElement('div');
-        overlay.className = 'sidebar-overlay';
-        document.body.appendChild(overlay);
-        
-        // Force reflow
-        overlay.offsetHeight;
-        
-        // Add active class after a brief delay
-        requestAnimationFrame(() => {
-            overlay.classList.add('active');
-        });
-        
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('collapsed');
-            removeOverlay();
-        });
-    }
-
-    function removeOverlay() {
-        const overlay = document.querySelector('.sidebar-overlay');
-        if (overlay) {
-            overlay.classList.remove('active');
-            // Wait for transition to complete before removing
-            overlay.addEventListener('transitionend', function handler() {
-                overlay.remove();
-                overlay.removeEventListener('transitionend', handler);
-            });
-        }
-    }
-
     // Update the resize handler
     function handleResize() {
         const width = window.innerWidth;
+        const sidebar = document.querySelector('.sidebar');
         
-        if (width <= 492) {
-            // Mobile view
+        if (width <= BREAKPOINTS.MOBILE) {
             sidebar.classList.add('collapsed');
-            removeOverlay();  // Ensure overlay is removed
-            document.body.style.overflow = '';
-        } else if (width <= 1780) {
-            // Tablet view - restore saved state or collapse
-            const overlay = document.querySelector('.sidebar-overlay');
-            if (overlay) {
-                removeOverlay();
-                document.body.style.overflow = '';
-            }
-            
-            // Default to collapsed on tablet unless explicitly expanded
+            sidebarManager.removeOverlay();
+        } else if (width <= BREAKPOINTS.TABLET) {
+            sidebarManager.removeOverlay();
             if (!localStorage.getItem('sidebarExpanded')) {
                 sidebar.classList.add('collapsed');
             }
         } else {
-            // Desktop view (> 1780px) - always expanded
-            const overlay = document.querySelector('.sidebar-overlay');
-            if (overlay) {
-                removeOverlay();
-                document.body.style.overflow = '';
-            }
-            
-            sidebar.classList.remove('collapsed'); // Always expanded on desktop
-            localStorage.clear(); // Clear stored state on desktop
+            sidebarManager.removeOverlay();
+            sidebar.classList.remove('collapsed');
+            localStorage.clear();
         }
     }
 
-    // Debounced resize listener with reduced timeout
-    let resizeTimer;
+    // Use RAF for smoother resize handling
+    let rafId;
     window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(handleResize, 10); 
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(handleResize);
     });
 
     // Initial setup
@@ -216,21 +259,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modify the document click listener
     document.addEventListener('click', (e) => {
-        // Only handle clicks when window width is <= 1780px
         if (window.innerWidth <= 1780) {
             const sidebar = document.querySelector('.sidebar');
             const menuToggle = document.querySelector('.menu-toggle');
             
-            // Check if sidebar is expanded and click is outside sidebar and menu toggle
             if (!sidebar.classList.contains('collapsed') && 
                 !sidebar.contains(e.target) && 
                 !menuToggle.contains(e.target)) {
-                e.preventDefault(); // Only prevent default if we're actually collapsing
-                collapseSidebar();
-                // Restore scroll position after collapse
-                requestAnimationFrame(() => {
-                    document.body.style.overflow = '';
-                });
+                
+                // Only handle overflow if we're on mobile
+                if (window.innerWidth <= 492) {
+                    cleanupMobileState();
+                } else {
+                    sidebar.classList.add('collapsed');
+                    localStorage.removeItem('sidebarExpanded');
+                }
             }
         }
     });
@@ -246,11 +289,12 @@ function setActiveButton(activeButton) {
 }
 
 function cleanupMobileState() {
-    document.body.style.overflow = '';
     const overlay = document.querySelector('.sidebar-overlay');
     if (overlay) {
-        removeOverlay();
+        document.body.style.overflow = '';
+        sidebarManager.removeOverlay();
     }
+    const sidebar = document.querySelector('.sidebar');
     sidebar.classList.add('collapsed');
 }
 

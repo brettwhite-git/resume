@@ -358,7 +358,7 @@ class AboutComponent {
 
         return `
             <div class="accomplishments-section">
-                <h2 class="section-title">Key Accomplishments</h2>
+                <h2 class="section-title">Key Highlights</h2>
                 <div class="stats-highlights-section">
                     <div class="highlights-grid">
                         ${highlightCards}
