@@ -131,7 +131,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 0 var(--spacing-xl);
+    margin: 0 0 var(--spacing-md);
 }
 
 .profile-image {
@@ -150,7 +150,7 @@ body {
 }
 
 .profile-name {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: var(--spacing-xs);
     margin-top: var(--spacing-sm);
@@ -387,6 +387,8 @@ body {
     background-color: #334155;
     transition: all 0.3s ease;
     cursor: pointer;
+    
+    position: relative;
 }
 
 .profile-image-container img {
@@ -395,12 +397,18 @@ body {
     object-fit: cover;
 }
 
+.profile-image-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 6px 1px #60A5FA,
+                0 0 10px 2px rgba(167, 139, 250, 0.6);
+}
+
 /* Profile section adjustments */
 .profile-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 0 var(--spacing-xl);
+    margin: 0 0 var(--spacing-md);
 }
 
 /* Hide original profile image */
@@ -413,6 +421,7 @@ body {
     width: 42px;
     height: 42px;
     margin: 45px auto 25px;
+    
 }
 
 .sidebar.collapsed .profile-section {
@@ -423,12 +432,6 @@ body {
 .sidebar.collapsed .nav-links {
     margin-top: 0;
     gap: 1rem;
-}
-
-/* Hover effects */
-.profile-image-container:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-hover);
 }
 
 /* Remove duplicate media queries and consolidate styles */

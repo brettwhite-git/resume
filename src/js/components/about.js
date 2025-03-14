@@ -71,7 +71,7 @@ class AboutComponent {
                     <span class="gradient-text">Cloud Solutions</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Solutions Specialist crafting intelligent enterprise systems, powered by Cloud & AI innovation
+                    Solutions Specialist helping customers craft intelligent enterprise systems, powered by Cloud & AI innovation
                 </p>
             </div>
         `;
@@ -87,7 +87,7 @@ class AboutComponent {
             {
                 title: 'CUSTOMER WINS',
                 value: '500+',
-                subtitle: 'successful onboardings'
+                subtitle: 'successful implementations'
             },
             {
                 title: 'COST SAVINGS',
@@ -309,7 +309,7 @@ class AboutComponent {
             {
                 icon: 'medal',
                 value: '4x',
-                label: 'SC Award Winner',
+                label: 'MVP Award Winner',
                 iconColor: '#fbbf24' // gold
             },
             {

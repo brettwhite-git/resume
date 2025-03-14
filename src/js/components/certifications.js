@@ -6,6 +6,12 @@ export const certificationsComponent = {
                 <div class="certifications-grid">
                     <!-- Oracle Cloud Certifications -->
                     <div class="cert-card">
+                        <h3 class="cert-title">Oracle Analytics Cloud Professional</h3>
+                        <p class="cert-description">
+                            Perform provisioning, build dimensional models, and create data visualizations. Use Advanced Analytics capabilities and create a machine learning models. Understand and use the various augmented capabilities available with Oracle Analytics Cloud.
+                        </p>
+                    </div>
+                    <div class="cert-card">
                         <h3 class="cert-title">Oracle Cloud Architect Associate</h3>
                         <p class="cert-description">
                             Design and implement comprehensive cloud solutions on Oracle Cloud Infrastructure, focusing on scalable architectures, security frameworks, and cost-effective deployment strategies while ensuring high availability and disaster recovery capabilities.
