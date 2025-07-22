@@ -25,15 +25,29 @@ export const workHistoryComponent = {
 function renderWorkHistory() {
     const workHistory = [
         {
+            title: "Principal Solution Consultant",
+            company: "Oracle NetSuite",
+            period: "June 2025 - Present",
+            description: "Oracle NetSuite is a leading cloud-based Enterprise Resource Planning (ERP) platform that offers a comprehensive suite of applications to manage business operations. It integrates various functions such as financials, CRM, e-commerce, and inventory, providing real-time visibility into financial data.",
+            achievements: [
+                "Drive product growth strategy across retail, hospitality, commerce, and apparel verticals while continuing to drive ARR through direct sales, creating standardized approaches the entire pre-sales team uses for vertical deals.",
+                "Run two subject matter expert groups that create customer-facing assets and demo materials, cutting prep time by 40% across all consultants while maintaining top individual performance.",
+                "Own the technical sales process for NetSuite Analytics Warehouse, building demonstration methods and training materials for consultants organization-wide use for complex data warehouse deals - achieved highest NSAW sales on the team while scaling methodology.",
+                "Integrate generative AI tools into pre-sales workflows, creating automated dataset generation that lets consultants create advanced demo scenarios 60% faster than doing it manually.",
+                "Support onboarding program for new consultants while serving in product advisory capacity, building structured training that covers business fundamentals and internal checkpoints."
+            ]
+        },
+        {
             title: "Senior Solution Consultant",
             company: "Oracle NetSuite",
-            period: "Dec 2021 - Present",
-            description: "Oracle NetSuite is a leading cloud-based Enterprise Resource Planning (ERP) platform that offers a comprehensive suite of applications to manage business operations. It integrates various functions such as financials, CRM, e-commerce, inventory, and more, providing real-time visibility into financial data and streamlining business processes.",
+            period: "Dec 2021 - June 2025",
+            description: "",
             achievements: [
                 "Generated over $10.6M in Annual Recurring Revenue as a top-requested consultant on a team of 20.",
                 "Achieved SC of the Year in an organization of 175 SCs, exceeding 250% attainment with an average 41% conversion rate.",
-                "Demonstrated deep expertise in NetSuite's architecture, enhancing customer concurrency and server efficiency to cut bottlenecks by up to 50%, by scaling computing resources or providing targeted guidance on optimizing concurrency and server requests.",
-                "Implemented client specifications through prototype demonstrations and customized solutions, enriching the ERP offering with knowledge on more than 22 add-on applications such as NetSuite's Analytics Warehouse, Planning & Budgeting, Connectors, and our proprietary e-commerce cloud offering, enhancing opportunities for upselling and customer stickiness."
+                "Built technical solutions that reduced customer system bottlenecks by up to 50% through architecture optimization and resource scaling recommendations.",
+                "Mastered 22+ add-on applications including NetSuite Analytics Warehouse, Planning & Budgeting, and e-commerce solutions, driving higher upsell rates and customer retention through expanded product demonstrations.",
+                "Delivered sales methodology workshops to Account Management teams, training on value selling techniques and product positioning strategies."
             ]
         },
         {
