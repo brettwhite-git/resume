@@ -5,6 +5,12 @@ export const certificationsComponent = {
                 <h2 class="section-title">Certifications</h2>
                 <div class="certifications-grid">
                     <!-- Oracle Cloud Certifications -->
+                     <div class="cert-card">
+                        <h3 class="cert-title">Oracle Autonomous Database Professional</h3>
+                        <p class="cert-description">
+                        Skills in provisioning, managing, monitoring, and migrating workloads to Autonomous Database on shared and dedicated Exadata infrastructure. Certified professionals demonstrate proficiency with Autonomous Database features, workflows, architecture, and development tools.
+                        </p>
+                    </div>
                     <div class="cert-card">
                         <h3 class="cert-title">Oracle Analytics Cloud Professional</h3>
                         <p class="cert-description">
